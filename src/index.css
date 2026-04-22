@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --page-bg:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(194, 106, 0, 0.12), transparent 22%),
+    linear-gradient(180deg, #f6f2ea 0%, #f0ece5 100%);
+  --panel-strong: rgba(255, 250, 244, 0.76);
+  --text-strong: #1a2230;
+  --text-soft: #576173;
+  --accent-strong: #0f766e;
+  --accent-warm: #c26a00;
+  --display: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
+  --body: 'Instrument Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+  color: var(--text-strong);
+  background: #f5f0e7;
+  font: 16px/1.55 var(--body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--page-bg);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.34) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.32) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+}
+
+h1 {
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: 0.98;
+}
+
+h2 {
+  font-size: 1.45rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+}
+
+a {
+  color: inherit;
+}
