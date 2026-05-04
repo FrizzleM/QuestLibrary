@@ -1,0 +1,5 @@
+{
+  "catalogUrl": "/remote-catalog.json",
+  "password": "",
+  "passwordHeader": "x-catalog-password"
+}
