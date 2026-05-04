@@ -47,9 +47,8 @@ export interface RemoteCatalogGame {
 
 
 export interface RemoteCatalogSourceConfig {
-  catalogUrl: string
-  password?: string
-  passwordHeader?: string
+  baseUri: string
+  password: string
 }
 
 export interface RemoteCatalog {

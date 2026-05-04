@@ -1,5 +1,4 @@
 {
-  "catalogUrl": "https://go.srcdl1.xyz/",
-  "password": "Z0w1OVZmZ1B4b0hS",
-  "passwordHeader": "Z0w1OVZmZ1B4b0hS"
+  "baseUri": "https://go.srcdl1.xyz/",
+  "password": "Z0w1OVZmZ1B4b0hS"
 }

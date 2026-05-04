@@ -232,22 +232,22 @@ function App() {
         }
 
         const sourceConfig = (await sourceResponse.json()) as RemoteCatalogSourceConfig
-        const catalogUrl = sourceConfig.catalogUrl?.trim()
-
-        if (!catalogUrl) {
-          throw new Error('Catalog source config is missing "catalogUrl".')
-        }
-
-        const headers = new Headers()
+        const baseUri = sourceConfig.baseUri?.trim()
         const password = sourceConfig.password?.trim()
 
-        if (password) {
-          headers.set(sourceConfig.passwordHeader?.trim() || 'x-catalog-password', password)
+        if (!baseUri) {
+          throw new Error('Catalog source config is missing "baseUri".')
         }
 
-        const response = await fetch(catalogUrl, {
+        if (!password) {
+          throw new Error('Catalog source config is missing "password".')
+        }
+
+        const catalogUrl = new URL('remote-catalog.json', baseUri)
+        catalogUrl.searchParams.set('password', password)
+
+        const response = await fetch(catalogUrl.toString(), {
           cache: 'no-store',
-          headers,
         })
 
         if (!response.ok) {
