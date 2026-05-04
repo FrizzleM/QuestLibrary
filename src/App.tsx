@@ -238,15 +238,16 @@ function App() {
           throw new Error('Catalog source config is missing "catalogUrl".')
         }
 
+        const headers = new Headers()
         const password = sourceConfig.password?.trim()
-        const catalogRequestUrl = new URL(catalogUrl, window.location.origin)
 
         if (password) {
-          catalogRequestUrl.searchParams.set('password', password)
+          headers.set(sourceConfig.passwordHeader?.trim() || 'x-catalog-password', password)
         }
 
-        const response = await fetch(catalogRequestUrl.toString(), {
+        const response = await fetch(catalogUrl, {
           cache: 'no-store',
+          headers,
         })
 
         if (!response.ok) {
