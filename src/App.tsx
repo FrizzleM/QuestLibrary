@@ -22,6 +22,7 @@ import type {
   InstallProgressSnapshot,
   LibraryManifest,
   RemoteCatalog,
+  RemoteCatalogSourceConfig,
 } from './types'
 
 const SUPPORTS_WEBUSB = typeof window !== 'undefined' && QuestBridge.isSupported()
@@ -224,7 +225,30 @@ function App() {
       setRemoteCatalogError('')
 
       try {
-        const response = await fetch('/remote-catalog.json', { cache: 'no-store' })
+        const sourceResponse = await fetch('/remote-catalog-source.json', { cache: 'no-store' })
+
+        if (!sourceResponse.ok) {
+          throw new Error(`Catalog source config request failed with HTTP ${sourceResponse.status}`)
+        }
+
+        const sourceConfig = (await sourceResponse.json()) as RemoteCatalogSourceConfig
+        const catalogUrl = sourceConfig.catalogUrl?.trim()
+
+        if (!catalogUrl) {
+          throw new Error('Catalog source config is missing "catalogUrl".')
+        }
+
+        const headers = new Headers()
+        const password = sourceConfig.password?.trim()
+
+        if (password) {
+          headers.set(sourceConfig.passwordHeader?.trim() || 'x-catalog-password', password)
+        }
+
+        const response = await fetch(catalogUrl, {
+          cache: 'no-store',
+          headers,
+        })
 
         if (!response.ok) {
           throw new Error(`Catalog request failed with HTTP ${response.status}`)

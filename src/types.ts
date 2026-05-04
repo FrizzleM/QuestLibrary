@@ -45,6 +45,13 @@ export interface RemoteCatalogGame {
   hasThumbnail: boolean
 }
 
+
+export interface RemoteCatalogSourceConfig {
+  catalogUrl: string
+  password?: string
+  passwordHeader?: string
+}
+
 export interface RemoteCatalog {
   generatedAt: string | null
   source: {
